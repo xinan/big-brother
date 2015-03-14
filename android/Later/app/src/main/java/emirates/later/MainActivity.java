@@ -72,7 +72,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setAlarm(13, 47);
 
         mSocket.on("new message", onNewMessage);
         mSocket.connect();
@@ -83,6 +82,10 @@ public class MainActivity extends ActionBarActivity {
                 mSocket.emit("foo", "hi");
             }
         });
+
+
+
+
     }
 
     @Override
@@ -124,23 +127,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void setAlarm(int hour, int minute) {
-        Intent openNewAlarm = new Intent(AlarmClock.ACTION_SET_ALARM);
-        openNewAlarm.putExtra(AlarmClock.EXTRA_MESSAGE, "Alarm Set By Big Brother.");
-        openNewAlarm.putExtra(AlarmClock.EXTRA_HOUR, 1);
-        openNewAlarm.putExtra(AlarmClock.EXTRA_MINUTES, 15);
-
-        try {
-            startActivity(openNewAlarm);
-            finish();
-            Log.i("Finished setting alarm", "");
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(MainActivity.this,
-                    "Setting alarm failed, please try again later.", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(MainActivity.this,
-                    e.toString(), Toast.LENGTH_SHORT).show();
-        }
+        Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+        i.putExtra(AlarmClock.EXTRA_HOUR, hour);
+        i.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+        startActivity(i);
     }
 
 }
