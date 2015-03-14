@@ -21,7 +21,7 @@ router.get('/idlers', function(req, res) {
         deviceId: 1,
         name: "Lu Bili",
         flight: {
-          flightNo: "SQ01",
+          flightNo: "EK01",
           flightTime: "2015-04-23T20:00:00.000+08:00"
         },
         location: {
@@ -37,7 +37,7 @@ router.get('/idlers', function(req, res) {
         deviceId: 2,
         name: "Adola Fazli",
         flight: {
-          flightNo: "SQ02",
+          flightNo: "EK02",
           flightTime: "2015-04-23T20:00:00.000+08:00"
         },
         location: {
@@ -53,7 +53,7 @@ router.get('/idlers', function(req, res) {
         deviceId: 3,
         name: "Mrunal Kumar",
         flight: {
-          flightNo: "SQ03",
+          flightNo: "EK03",
           flightTime: "2015-04-23T20:00:00.000+08:00"
         },
         location: {
