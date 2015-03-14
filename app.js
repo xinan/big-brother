@@ -4,8 +4,6 @@ var favicon = require('static-favicon');
 var logger  = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
 // var File = require('File');
 // var FileReader = require('FileReader');
 
@@ -13,6 +11,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -89,70 +89,10 @@ io.on('connection', function(socket) {
     });
 });
 
-// Alerts the user that he/she is late for the flight
-app.get('/alert/:id', function(req, res) {
-    res.send({
-        status: true
-    });
-    socket.emit('ALERT', { message: 'You are late for your flight!'});
-});
-
-// Returns the idlers 
-app.get('/idlers', function(req, res) {
-  res.send({
-    users: [
-      {
-        deviceId: 1,
-        name: "Lu Bili",
-        flight: {
-          flightNo: "SQ01",
-          flightTime: "2015-04-23T20:00:00.000+08:00"
-        },
-        location: {
-          lat: 25.244515300668223,
-          long: 55.37045352788945,
-          floor: 1
-        },
-        boardingGate: 'A1'
-      },
-      {
-        deviceId: 2,
-        name: "Adola Fazli",
-        flight: {
-          flightNo: "SQ02",
-          flightTime: "2015-04-23T20:00:00.000+08:00"
-        },
-        location: {
-          lat: 25.24282729711983,
-          long: 55.37245461207174,
-          floor: 1
-        },
-        boardingGate: 'A1'
-      },
-      {
-        deviceId: 3,
-        name: "Mrunal Kumar",
-        flight: {
-          flightNo: "SQ03",
-          flightTime: "2015-04-23T20:00:00.000+08:00"
-        },
-        location: {
-          lat: 25.243092514556807,
-          long: 55.37219699963714,
-          floor: 1
-        },
-        boardingGate: 'A1'
-      }
-    ],
-    requestTime: "2015-04-23T20:00:00.000+08:00"
-  });
-});
-
-
 // Listen on port
 var port = Number(process.env.PORT || 3000);
 server.listen(port, function() {
-    console.log('Listening on port' + port + '...');
+    console.log('Socket listening on port ' + port + '...');
 });
 
 /**
@@ -160,12 +100,13 @@ server.listen(port, function() {
 */
 function setAlarm(socket) {
     // TODO: Set hour and minutes
-    var flightTime = getFlightTime(userData.flightNum);
-    socket.emit('SET_ALARM', flightTime);
+    // var flightTime = getFlightTime(userData.flightNum);
+    // socket.emit('SET_ALARM', flightTime);
 }
 
 function getFlightTime(flightNum) {
     // TODO: use api to find time of departure
+    /*
     var hour    = 0;
     var minute  = 0;
 
@@ -173,6 +114,7 @@ function getFlightTime(flightNum) {
         "hour": hour,
         "minute": minute
     };
+    */
 }
 
 function sendOffer(socket, report) {
@@ -214,17 +156,15 @@ function sendOffer(socket, report) {
     socket.emit('SEND_OFFER', offer);
 }
 
-function getVoucher(socket, offerID) {
-    return 3; // dummy data
-}
-
 function sendVoucher(socket, offerID) {
+    /*
     var voucherID = getVoucher(offerID);
     socket.emit('OFFER_VOUCHER', voucherID);
+    */
 }
 
 function sendRejectConfirmation(socket) {
-    socket.emit('REJECT_CONFIRMED', "");
+    // socket.emit('REJECT_CONFIRMED', "");
 }
 
 module.exports = app;
