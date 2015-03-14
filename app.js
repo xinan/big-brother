@@ -74,6 +74,7 @@ io.on('connection', function(socket) {
         userData.flightNum = (data.flightNum === "") ? (socket.emit("NO_FLIGHT_NUM", "")) : data.flightNum;
     });
     socket.on('REPORT', function (report) {
+        console.log('report sent');
         userData.reports.push(report);
         sendOffer(socket, report);
     });
@@ -145,7 +146,7 @@ function sendOffer(socket, report) {
     */
     var offer = {
         id: 1,
-        image: 'burgerking',
+        image: (userData.declineNum === 0) ? 'burgerking' : 'whisky',
         title: 'Burger King Chicken Royale',
         tier: 2,
         description: 'You have won a free Chicken Royale in Burger King!'
@@ -167,7 +168,7 @@ function sendRejectConfirmation(socket) {
     socket.emit('REJECT_CONFIRMED', "");
 }
 
-var port = Number(process.env.PORT || 5000);
+var port = Number(process.env.PORT || 3000);
 server.listen(port, function() {
     console.log('Listening on port' + port + '...');
 });
