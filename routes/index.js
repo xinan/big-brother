@@ -73,5 +73,16 @@ router.get('/idlers', function(req, res) {
     requestTime: "2015-04-23T20:00:00.000+08:00"
   });
 });
+
+router.get('/sendoffer1', function(req, res) {
+  io.emit('send offer', 'burgerking');
+  res.send(200);
+});
+
+router.get('/sendoffer2', function(req, res) {
+  io.emit('send offer', 'whiskey');
+  res.send(200);
+});
+
   return router;
 }
