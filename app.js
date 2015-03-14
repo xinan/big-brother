@@ -102,6 +102,25 @@ io.on('connection', function(socket) {
         };
         socket.emit('register user', user);
 
+        console.log('report sent');
+        userData.reports.push(report);
+        sendOffer(socket, report);
+    });
+    socket.on('offer decision', function (offer) {
+        if (offer.hasAccepted) {
+            // voucher
+            userData.declineNum = -1;
+            sendVoucher(socket, offer.id);
+        } else {
+            userData.declineNum++;
+            sendRejectConfirmation(socket);
+        }
+    });
+    socket.on('send alert', function (offer) {
+        socket.emit('late person');
+    });
+
+    socket.on('request all users', function(req) {
         var userCollection = [{
             deviceId: 2,
             name: "Adola Fazli",
@@ -134,24 +153,7 @@ io.on('connection', function(socket) {
             status: 'alert',
             statusTime: 10
           }];
-        socket.emit('get all user', userCollection);
-
-        console.log('report sent');
-        userData.reports.push(report);
-        sendOffer(socket, report);
-    });
-    socket.on('offer decision', function (offer) {
-        if (offer.hasAccepted) {
-            // voucher
-            userData.declineNum = -1;
-            sendVoucher(socket, offer.id);
-        } else {
-            userData.declineNum++;
-            sendRejectConfirmation(socket);
-        }
-    });
-    socket.on('send alert', function (offer) {
-        socket.emit('late person');
+        socket.emit('all users', userCollection);
     });
 });
 
