@@ -20,7 +20,8 @@ router.get('/idlers', function(req, res) {
           lat: 25.244515300668223,
           long: 55.37045352788945,
           floor: 1
-        }
+        },
+        boardingGate: 'A1'
       },
       {
         deviceId: 2,
@@ -33,7 +34,8 @@ router.get('/idlers', function(req, res) {
           lat: 25.24282729711983,
           long: 55.37245461207174,
           floor: 1
-        }
+        },
+        boardingGate: 'A1'
       },
       {
         deviceId: 3,
@@ -46,10 +48,18 @@ router.get('/idlers', function(req, res) {
           lat: 25.243092514556807,
           long: 55.37219699963714,
           floor: 1
-        }
+        },
+        boardingGate: 'A1'
       }
     ],
     requestTime: "2015-04-23T20:00:00.000+08:00"
+  });
+});
+
+router.get('/alert/:id', function(req, res) {
+  var id = req.params.id;
+  res.send({
+    status: true
   });
 });
 
