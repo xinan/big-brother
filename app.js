@@ -4,14 +4,13 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var fs = require('fs');
+var File = require('File');
+var FileReader = require('FileReader');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -112,11 +111,10 @@ function getFlightTime(flightNum) {
 }
 
 function sendOffer(socket, report) {
-    // Read the local file
-    var imageFile = fs.readFileSync(__dirname + '/burgerking.jpg');
-
-    // Change the image file to base-64
     var reader = new FileReader();
+    
+    // Read the local file
+    var imageFile = new File(__dirname + '/burgerking.jpg');
 
     // Actual image
     var image;
@@ -130,6 +128,7 @@ function sendOffer(socket, report) {
             description: 'You have won a free Chicken Royale in Burger King!'
         };
         socket.emit("SEND_OFFER", offer);
+        console.log(image);
     };
     reader.readAsDataURL(imageFile);
 }
