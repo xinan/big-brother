@@ -1,5 +1,6 @@
 package emirates.later;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,7 +17,6 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.github.nkzawa.*;
-
 
 
 import com.android.volley.Request;
@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://192.168.1.67:3000");
+            mSocket = IO.socket(getResources().getString(R.string.website));
         } catch (URISyntaxException e) {}
     }
 //
@@ -56,7 +56,6 @@ public class MainActivity extends ActionBarActivity {
                     } catch (JSONException e) {
                         return;
                     }
-
                     // add the message to view
                     addMessage(username, message);
                 }
@@ -79,8 +78,6 @@ public class MainActivity extends ActionBarActivity {
         button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 mSocket.emit("foo", "hi");
-                toast("emitted foo");
-
             }
         });
     }
@@ -120,12 +117,8 @@ public class MainActivity extends ActionBarActivity {
     public void onDestroy() {
         super.onDestroy();
 
-//        mSocket.disconnect();
-//        mSocket.off("new message", onNewMessage);
+        mSocket.disconnect();
+        mSocket.off("new message", onNewMessage);
     }
 
-    public void toast(String msg) {
-        Toast.makeText(getApplicationContext(), msg,
-                Toast.LENGTH_LONG).show();
-    }
 }
