@@ -45,4 +45,26 @@
         android:layout_centerHorizontal="true"
         android:textSize="40dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/message"
+        android:layout_below="@+id/username"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Socket"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/appLogo" />
+
 </RelativeLayout>

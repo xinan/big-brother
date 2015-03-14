@@ -1,6 +1,8 @@
 package emirates.later;
 
 import android.content.Context;
+import android.content.Intent;
+import android.provider.AlarmClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -64,10 +66,13 @@ public class MainActivity extends ActionBarActivity {
     };
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        setAlarm(13, 47);
 
 
 
@@ -81,15 +86,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
-
-    private void addMessage(String username, String message) {
-        TextView usernameView = (TextView) findViewById(R.id.username);
-        TextView messageView = (TextView) findViewById(R.id.message);
-
-        usernameView.setText(username);
-        messageView.setText(message);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,5 +116,20 @@ public class MainActivity extends ActionBarActivity {
         mSocket.disconnect();
         mSocket.off("new message", onNewMessage);
     }
+
+    private void addMessage(String username, String message) {
+        TextView usernameView = (TextView) findViewById(R.id.username);
+        TextView messageView = (TextView) findViewById(R.id.message);
+
+        usernameView.setText(username);
+        messageView.setText(message);
+    }
+
+//    private void setAlarm(int hour, int minute) {
+//        Intent openNewAlarm = new Intent(AlarmClock.ACTION_SET_ALARM);
+//        openNewAlarm.putExtra(AlarmClock.EXTRA_HOUR, hour);
+//        openNewAlarm.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+//        startActivity(openNewAlarm);
+//    }
 
 }
