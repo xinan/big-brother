@@ -235,8 +235,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void showOffer(JSONObject offer) {
-        // show the offer to the person.
-        // get the response for the offer.
         TextView offerDescView = (TextView) findViewById(R.id.offerDesc);
         TextView offerTitleView = (TextView) findViewById(R.id.offerTitle);
         ImageView offerImageView = (ImageView) findViewById(R.id.offerImage);
@@ -257,21 +255,35 @@ public class MainActivity extends ActionBarActivity {
         Bitmap offerImageDecoded = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         offerImageView.setImageBitmap(offerImageDecoded);
 
-
         setContentView(R.layout.activity_offer);
-        boolean response = false; // store the result of the selection
-        waitForResponse(response);
+
+        Button acceptButton = (Button) findViewById(R.id.button);
+        acceptButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                offerReply(true);
+            }
+        });
+        Button declineButton = (Button) findViewById(R.id.button);
+        declineButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                offerReply(false);
+            }
+        });
+
     }
 
-    private void waitForResponse(boolean response) {
+    private void offerReply(boolean response) {
         JSONObject offerResponse = new JSONObject();
 
         try {
             offerResponse.put("hasAccepted", response);
             offerResponse.put("id", mOffer.get("id"));
+            mSocket.emit("OFFER_DECISION", offerResponse);
+            setContentView(R.layout.activity_main);
         } catch (Exception e) {
             print("Something went wrong with showing the offer.");
         }
+
     }
 
     private void setName() {
