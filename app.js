@@ -166,8 +166,9 @@ function sendRejectConfirmation(socket) {
     socket.emit('REJECT_CONFIRMED', "");
 }
 
-server.listen(3000, function() {
-    console.log('Express server listening on port 3000...');
+var port = Number(process.env.PORT || 5000);
+server.listen(port, function() {
+    console.log('Listening on port' + port + '...');
 });
 
 module.exports = app;
