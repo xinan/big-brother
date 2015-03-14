@@ -118,8 +118,14 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void run() {
                     mOffer = (JSONObject) args[0];
-                    print("Sending Offer...");
-                    setFlightNum();
+                    try {
+                        print(mOffer.getString("title"));
+                    } catch (Exception e) {
+                        print("error seeing title");
+                    }
+
+                    print("Receving Offer...");
+//                    showOffer(mOffer);
                 }
             });
         }
@@ -175,7 +181,7 @@ public class MainActivity extends ActionBarActivity {
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                mSocket.emit("foo", "hi");
+                mSocket.emit("REPORT", "hi");
             }
         });
 
@@ -315,7 +321,7 @@ public class MainActivity extends ActionBarActivity {
 
         alert.setTitle("Enter Flight Number:");
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         input.setText(mFlightNum);
         alert.setView(input);
 

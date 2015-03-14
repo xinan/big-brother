@@ -49,4 +49,5 @@
         android:layout_alignTop="@+id/offerAccept"
         android:layout_toEndOf="@+id/offerAccept"
         android:textSize="40dp" />
+
 </RelativeLayout>
