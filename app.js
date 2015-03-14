@@ -4,13 +4,13 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var File = require('File');
+var FileReader = require('FileReader');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -65,11 +65,8 @@ var userData = {
     name: "",
     flightNum: "",
     declineNum: 0,
-    reports = [],
-
+    reports: []
 };
-
-
 
 io.on('connection', function(socket) {
     socket.emit('CONNECTION_STARTED', "Connection started successfully.");
@@ -83,23 +80,57 @@ io.on('connection', function(socket) {
     });
     socket.on('OFFER_DECISION', function (offer) {
         if (offer.hasAccepted) {
+            // voucher
             userData.declineNum = -1;
             sendVoucher(socket, offer.id);
         } else {
             userData.declineNum++;
             sendRejectConfirmation(socket);
         }
-    })
+    });
 
-    socket.on('')
+    // socket.on('')
 });
 
 // Helper functions
 
+function setAlarm(socket) {
+    var flightTime = getFlightTime(userData.flightNum);
+    socket.emit('SET_ALARM', flightTime);
+}
+
+function getFlightTime(flightNum) {
+    // use api to find time of departure
+    // var hour;
+    // var minute;
+
+    return {
+        "hour": hour,
+        "minute": minute
+    }
+}
+
 function sendOffer(socket, report) {
-    // analyze the report and send the socket the offer
-    var offer = ; //store offer here
-    socket.emit("SEND_OFFER", offer);
+    var reader = new FileReader();
+    
+    // Read the local file
+    var imageFile = new File(__dirname + '/burgerking.jpg');
+
+    // Actual image
+    var image;
+    reader.onload = function (e) {
+        image = e.target.result;
+        // analyze the report and send the socket the offer
+        var offer = {
+            image: image,
+            title: 'Burger King Chicken Royale',
+            tier: 2,
+            description: 'You have won a free Chicken Royale in Burger King!'
+        };
+        socket.emit("SEND_OFFER", offer);
+        console.log(image);
+    };
+    reader.readAsDataURL(imageFile);
 }
 
 function sendVoucher(socket, offerID) {
