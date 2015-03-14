@@ -307,8 +307,14 @@ public class MainActivity extends ActionBarActivity {
                 return R.drawable.cross;
             case "tick":
                 return R.drawable.tick;
+            case "time":
+                return R.drawable.time;
+            case "flightinfo":
+                return R.drawable.flightinfo;
+            case "flightdelay":
+                return R.drawable.flightdelay;
             default:
-                return R.drawable.defaultimage;
+                return 0;
         }
     }
 
