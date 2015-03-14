@@ -91,6 +91,14 @@ io.on('connection', function(socket) {
     // socket.on('')
 });
 
+// yi wen's get requests
+app.get('/alert/:id', function(req, res) {
+    res.send({
+        "status": "success"
+    });
+    socket.emit('WAKE_UP', "");
+});
+
 // Helper functions
 
 function setAlarm(socket) {

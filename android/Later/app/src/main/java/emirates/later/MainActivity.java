@@ -118,8 +118,14 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void run() {
                     mOffer = (JSONObject) args[0];
-                    print("Sending Offer...");
-                    setFlightNum();
+                    try {
+                        print(mOffer.getString("title"));
+                    } catch (Exception e) {
+                        print("error seeing title");
+                    }
+
+                    print("Receving Offer...");
+//                    showOffer(mOffer);
                 }
             });
         }
@@ -175,7 +181,7 @@ public class MainActivity extends ActionBarActivity {
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                mSocket.emit("foo", "hi");
+                mSocket.emit("REPORT", "hi");
             }
         });
 
@@ -235,8 +241,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void showOffer(JSONObject offer) {
-        // show the offer to the person.
-        // get the response for the offer.
         TextView offerDescView = (TextView) findViewById(R.id.offerDesc);
         TextView offerTitleView = (TextView) findViewById(R.id.offerTitle);
         ImageView offerImageView = (ImageView) findViewById(R.id.offerImage);
@@ -257,21 +261,35 @@ public class MainActivity extends ActionBarActivity {
         Bitmap offerImageDecoded = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         offerImageView.setImageBitmap(offerImageDecoded);
 
-
         setContentView(R.layout.activity_offer);
-        boolean response = false; // store the result of the selection
-        waitForResponse(response);
+
+        Button acceptButton = (Button) findViewById(R.id.button);
+        acceptButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                offerReply(true);
+            }
+        });
+        Button declineButton = (Button) findViewById(R.id.button);
+        declineButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                offerReply(false);
+            }
+        });
+
     }
 
-    private void waitForResponse(boolean response) {
+    private void offerReply(boolean response) {
         JSONObject offerResponse = new JSONObject();
 
         try {
             offerResponse.put("hasAccepted", response);
             offerResponse.put("id", mOffer.get("id"));
+            mSocket.emit("OFFER_DECISION", offerResponse);
+            setContentView(R.layout.activity_main);
         } catch (Exception e) {
             print("Something went wrong with showing the offer.");
         }
+
     }
 
     private void setName() {
@@ -303,7 +321,7 @@ public class MainActivity extends ActionBarActivity {
 
         alert.setTitle("Enter Flight Number:");
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         input.setText(mFlightNum);
         alert.setView(input);
 
