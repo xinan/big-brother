@@ -295,6 +295,7 @@ public class MainActivity extends ActionBarActivity {
             offerResponse.put("hasAccepted", response);
             offerResponse.put("id", mOffer.get("id"));
             mSocket.emit("OFFER_DECISION", offerResponse);
+            print("" + response);
             setContentView(R.layout.activity_main);
         } catch (Exception e) {
             print("Something went wrong with showing the offer.");
