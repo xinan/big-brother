@@ -3,14 +3,20 @@ package emirates.later;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.github.nkzawa.*;
+
 
 
 import com.android.volley.Request;
@@ -31,25 +37,30 @@ public class MainActivity extends ActionBarActivity {
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://chat.socket.io");
+            mSocket = IO.socket("http://192.168.1.67:3000");
         } catch (URISyntaxException e) {}
     }
-
+//
     private Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override
-        public void call(final Object[] args) {
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    String username;
+                    String message;
+                    try {
+                        username = data.getString("username");
+                        message = data.getString("message");
+                    } catch (JSONException e) {
+                        return;
+                    }
 
-            JSONObject data = (JSONObject) args[0];
-            String username;
-            String message;
-            try {
-                username = data.getString("username");
-                message = data.getString("message");
-            } catch (JSONException e) {
-                return;
-            }
-            // add the message to view
-            addMessage(username, message);
+                    // add the message to view
+                    addMessage(username, message);
+                }
+            });
         }
     };
 
@@ -59,20 +70,19 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         mSocket.on("new message", onNewMessage);
         mSocket.connect();
-    }
 
-    private EditText mInputMessageView;
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                mSocket.emit("foo", "hi");
+                toast("emitted foo");
 
-    private void attemptSend() {
-        String message = mInputMessageView.getText().toString().trim();
-        if (TextUtils.isEmpty(message)) {
-            return;
-        }
-
-        mInputMessageView.setText("");
-        mSocket.emit("new message", message);
+            }
+        });
     }
 
     private void addMessage(String username, String message) {
@@ -110,7 +120,12 @@ public class MainActivity extends ActionBarActivity {
     public void onDestroy() {
         super.onDestroy();
 
-        mSocket.disconnect();
-        mSocket.off("new message", onNewMessage);
+//        mSocket.disconnect();
+//        mSocket.off("new message", onNewMessage);
+    }
+
+    public void toast(String msg) {
+        Toast.makeText(getApplicationContext(), msg,
+                Toast.LENGTH_LONG).show();
     }
 }
