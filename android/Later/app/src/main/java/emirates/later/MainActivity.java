@@ -152,6 +152,25 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
+    private Emitter.Listener onAlert = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject obj = (JSONObject) args[0];
+                    try {
+                        String msg = obj.getString("message");
+                        print(msg);
+                    } catch (Exception e) {
+                        print("Something went wrong with alert!");
+                    }
+
+                }
+            });
+        }
+    };
+
     private void sendReport() {
         String[] beaconIDs = getBeaconIDs();
         mSocket.emit("REPORT", beaconIDs);
@@ -173,6 +192,7 @@ public class MainActivity extends ActionBarActivity {
         mSocket.on("SEND_OFFER", onSendOffer);
         mSocket.on("OFFER_VOUCHER", onOfferVoucher);
         mSocket.on("REJECT_CONFIRMED", onRejectConfirmed);
+        mSocket.on("ALERT", onAlert);
         mSocket.connect();
 
         Button button = (Button) findViewById(R.id.button);
@@ -238,48 +258,33 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void showOffer(JSONObject offer) {
-        print("entered showOffer");
-
         setContentView(R.layout.activity_offer);
 
-        TextView offerDescView = (TextView) findViewById(R.id.offerDescView);
-        TextView offerTitleView = (TextView) findViewById(R.id.offerTitleView);
-        ImageView offerImageView = (ImageView) findViewById(R.id.offerImage);
-        String offerTitle = "";
-        String offerDesc = "";
-        String offerImage = "";
-
         try {
-            offerTitle = offer.getString("title");
-            offerDesc = offer.getString("description");
-            offerImage = offer.getString("image");
 
-            offerTitleView.setText(offerTitle);
-            offerDescView.setText(offerDesc);
+            String offerImage = offer.getString("image");
+            ImageView offerImageView = (ImageView) findViewById(R.id.offerImage);
             offerImageView.setBackgroundResource(getImageID(offerImage));
+
+            Button acceptButton = (Button) findViewById(R.id.acceptOffer);
+            acceptButton.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                    print("accept");
+                    offerReply(true);
+                }
+            });
+            Button declineButton = (Button) findViewById(R.id.declineOffer);
+            declineButton.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                    print("decline");
+                    offerReply(false);
+                }
+            });
 
         } catch (Exception e) {
             print("something went wrong in showing offer.");
             print(e.toString());
         }
-
-
-
-//
-        Button acceptButton = (Button) findViewById(R.id.offerAccept);
-        acceptButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                offerReply(true);
-            }
-        });
-        Button declineButton = (Button) findViewById(R.id.offerDecline);
-        declineButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                offerReply(false);
-            }
-        });
-        print("exited showOffer");
-
 
     }
 
@@ -300,7 +305,7 @@ public class MainActivity extends ActionBarActivity {
     private int getImageID(String name) {
         switch(name) {
             case "burgerking":
-                return R.drawable.burgerking;
+                return R.drawable.burger;
             case "whisky":
                 return R.drawable.whisky;
             case "cross":
