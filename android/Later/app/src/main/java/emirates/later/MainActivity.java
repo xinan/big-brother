@@ -39,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket(getResources().getString(R.string.website));
+            mSocket = IO.socket("http://192.168.1.67:3000");
         } catch (URISyntaxException e) {}
     }
 //
@@ -125,11 +125,12 @@ public class MainActivity extends ActionBarActivity {
         messageView.setText(message);
     }
 
-//    private void setAlarm(int hour, int minute) {
-//        Intent openNewAlarm = new Intent(AlarmClock.ACTION_SET_ALARM);
-//        openNewAlarm.putExtra(AlarmClock.EXTRA_HOUR, hour);
-//        openNewAlarm.putExtra(AlarmClock.EXTRA_MINUTES, minute);
-//        startActivity(openNewAlarm);
-//    }
+    private void setAlarm(int hour, int minute) {
+        Intent openNewAlarm = new Intent(AlarmClock.ACTION_SET_ALARM);
+        openNewAlarm.putExtra(AlarmClock.EXTRA_MESSAGE, "Alarm Set By Big Brother.");
+        openNewAlarm.putExtra(AlarmClock.EXTRA_HOUR, 1);
+        openNewAlarm.putExtra(AlarmClock.EXTRA_MINUTES, 15);
+        startActivity(openNewAlarm);
+    }
 
 }

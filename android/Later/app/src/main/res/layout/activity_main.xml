@@ -37,17 +37,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Airport Options"
-        android:id="@+id/airportOptions"
-        android:layout_marginTop="81dp"
-        android:layout_below="@+id/flightTime"
-        android:layout_centerHorizontal="true"
-        android:textSize="40dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/username"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -64,7 +53,17 @@
         android:layout_height="wrap_content"
         android:text="Test Socket"
         android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/appLogo" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Airport Options"
+        android:id="@+id/airportOptions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/flightTime"
+        android:textSize="35dp" />
 
 </RelativeLayout>
