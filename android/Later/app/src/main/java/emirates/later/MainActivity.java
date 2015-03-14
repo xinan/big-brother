@@ -9,8 +9,6 @@ import android.provider.AlarmClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +20,6 @@ import android.widget.Toast;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-import com.github.nkzawa.*;
 
 
 import com.android.volley.Request;
@@ -53,23 +50,21 @@ public class MainActivity extends ActionBarActivity {
         } catch (URISyntaxException e) {}
     }
 
-    private Emitter.Listener onNewMessage = new Emitter.Listener() {
+    private Emitter.Listener onConnectionStarted = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    String username;
-                    String message;
+                    print("Connection Started.");
+                    JSONObject mUser = new JSONObject();
                     try {
-                        username = data.getString("username");
-                        message = data.getString("message");
-                    } catch (JSONException e) {
-                        return;
+                        mUser.put("name", mName);
+                        mUser.put("flightNum", mFlightNum);
+                    } catch (Exception e) {
+                        print("Something went wrong.\n Please restart the app.");
                     }
-                    // add the message to view
-                    addMessage(username, message);
+                    mSocket.emit("CONNECTION_CONFIRMED", mUser);
                 }
             });
         }
@@ -81,14 +76,54 @@ public class MainActivity extends ActionBarActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    JSONObject data = (JSONObject) args[0];
-
+                    print("Please enter your flight number.");
+                    setFlightNum();
                 }
             });
         }
     };
 
+    private Emitter.Listener onSendOffer = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    print("Sending Offer...");
+                    setFlightNum();
+                }
+            });
+        }
+    };
 
+    private Emitter.Listener onOfferVoucher = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    print("Your offer voucher is ...");
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onRejectConfirmed = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    print("You have rejected the offer.\nHope to get better ones. :)");
+                }
+            });
+        }
+    };
+
+    private void sendReport() {
+        String[] beaconIDs = getBeaconIDs();
+        mSocket.emit("REPORT", beaconIDs);
+    }
 
 
     @Override
@@ -97,8 +132,11 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         settings = getPreferences(MODE_PRIVATE);
+        mName = settings.getString("mName", mName);
+        mFlightNum = settings.getString("mFlightNum", mFlightNum);
 
         mSocket.on("CONNECTION_STARTED", onConnectionStarted);
+        mSocket.on("NO_FLIGHT_NUM", onNoFlightNum);
         mSocket.on("SEND_OFFER", onSendOffer);
         mSocket.on("OFFER_VOUCHER", onOfferVoucher);
         mSocket.on("REJECT_CONFIRMED", onRejectConfirmed);
@@ -148,6 +186,8 @@ public class MainActivity extends ActionBarActivity {
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
         SharedPreferences.Editor editor = settings.edit();
+        editor.putString("mName", mName);
+        editor.putString("mFlightNum", mFlightNum);
 
         // Commit the edits!
         editor.commit();
@@ -158,15 +198,24 @@ public class MainActivity extends ActionBarActivity {
         super.onDestroy();
 
         mSocket.disconnect();
-        mSocket.off("new message", onNewMessage);
     }
 
-    private void addMessage(String username, String message) {
-        TextView usernameView = (TextView) findViewById(R.id.username);
-        TextView messageView = (TextView) findViewById(R.id.message);
+    private String[] getBeaconIDs() {
+        return null;
+    }
 
-        usernameView.setText(username);
-        messageView.setText(message);
+    private void showOffer(JSONObject offer) {
+        // show the offer to the person.
+        // get the response for the offer.
+        boolean response = false; // store the result of the selection
+        JSONObject offerResponse = new JSONObject();
+        try {
+            offerResponse.put("hasAccepted", response);
+            offerResponse.put("id", offer.get("id"));
+        } catch (Exception e) {
+            print("Something went wrong with showing the offer.");
+        }
+
     }
 
     private void setName() {
@@ -217,10 +266,9 @@ public class MainActivity extends ActionBarActivity {
         alert.show();
     }
 
-
-
-    private void setAlarm(int hour, int minute) {
+    private void setAlarm(int hour, int minute, String message) {
         Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+        i.putExtra(AlarmClock.EXTRA_MESSAGE, message);
         i.putExtra(AlarmClock.EXTRA_HOUR, hour);
         i.putExtra(AlarmClock.EXTRA_MINUTES, minute);
         startActivity(i);
