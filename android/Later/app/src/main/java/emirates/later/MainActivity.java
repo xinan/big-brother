@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -15,8 +19,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URISyntaxException;
+
 
 public class MainActivity extends ActionBarActivity {
+
+    private Socket mSocket;
+    {
+        try {
+            mSocket = IO.socket("http://chat.socket.io");
+        } catch (URISyntaxException e) {}
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
