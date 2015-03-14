@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.provider.AlarmClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +40,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -118,14 +122,7 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void run() {
                     mOffer = (JSONObject) args[0];
-                    try {
-                        print(mOffer.getString("title"));
-                    } catch (Exception e) {
-                        print("error seeing title");
-                    }
-
-                    print("Receving Offer...");
-//                    showOffer(mOffer);
+                    showOffer(mOffer);
                 }
             });
         }
@@ -241,40 +238,48 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void showOffer(JSONObject offer) {
-        TextView offerDescView = (TextView) findViewById(R.id.offerDesc);
-        TextView offerTitleView = (TextView) findViewById(R.id.offerTitle);
+        print("entered showOffer");
+
+        setContentView(R.layout.activity_offer);
+
+        TextView offerDescView = (TextView) findViewById(R.id.offerDescView);
+        TextView offerTitleView = (TextView) findViewById(R.id.offerTitleView);
         ImageView offerImageView = (ImageView) findViewById(R.id.offerImage);
         String offerTitle = "";
         String offerDesc = "";
         String offerImage = "";
+
         try {
             offerTitle = offer.getString("title");
             offerDesc = offer.getString("description");
             offerImage = offer.getString("image");
+
+            offerTitleView.setText(offerTitle);
+            offerDescView.setText(offerDesc);
+            offerImageView.setBackgroundResource(getImageID(offerImage));
+
         } catch (Exception e) {
             print("something went wrong in showing offer.");
+            print(e.toString());
         }
 
-        offerTitleView.setText(offerTitle);
-        offerDescView.setText(offerDesc);
-        byte[] decodedString = Base64.decode(offerImage, Base64.DEFAULT);
-        Bitmap offerImageDecoded = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        offerImageView.setImageBitmap(offerImageDecoded);
 
-        setContentView(R.layout.activity_offer);
 
-        Button acceptButton = (Button) findViewById(R.id.button);
+//
+        Button acceptButton = (Button) findViewById(R.id.offerAccept);
         acceptButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 offerReply(true);
             }
         });
-        Button declineButton = (Button) findViewById(R.id.button);
+        Button declineButton = (Button) findViewById(R.id.offerDecline);
         declineButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 offerReply(false);
             }
         });
+        print("exited showOffer");
+
 
     }
 
@@ -290,6 +295,21 @@ public class MainActivity extends ActionBarActivity {
             print("Something went wrong with showing the offer.");
         }
 
+    }
+
+    private int getImageID(String name) {
+        switch(name) {
+            case "burgerking":
+                return R.drawable.burgerking;
+            case "whisky":
+                return R.drawable.whisky;
+            case "cross":
+                return R.drawable.cross;
+            case "tick":
+                return R.drawable.tick;
+            default:
+                return R.drawable.defaultimage;
+        }
     }
 
     private void setName() {

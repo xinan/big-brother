@@ -15,28 +15,29 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Offer Title"
-        android:id="@+id/offerTitle"
+        android:id="@+id/offerTitleView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
-        android:textSize="40dp" />
+        android:textSize="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Offer Description"
-        android:id="@+id/offerDesc"
-        android:layout_centerVertical="true"
+        android:id="@+id/offerDescView"
+        android:layout_below="@+id/offerTitleView"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:layout_marginTop="35dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accept"
         android:id="@+id/offerAccept"
-        android:layout_below="@+id/offerDesc"
+        android:layout_below="@+id/offerDescView"
         android:layout_alignEnd="@+id/offerImage"
         android:layout_marginTop="99dp"
         android:textSize="40dp" />
