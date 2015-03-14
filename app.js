@@ -213,6 +213,10 @@ function sendOffer(socket, report) {
     socket.emit('SEND_OFFER', offer);
 }
 
+function getVoucher(socket, offerID) {
+    return 3; // dummy data
+}
+
 function sendVoucher(socket, offerID) {
     var voucherID = getVoucher(offerID);
     socket.emit('OFFER_VOUCHER', voucherID);
