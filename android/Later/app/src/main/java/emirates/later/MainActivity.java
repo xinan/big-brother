@@ -7,15 +7,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.AlarmClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,12 +88,36 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
+    private Emitter.Listener onSetAlarm = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject time = (JSONObject) args[0];
+                    try {
+                        int hour = time.getInt("hour");
+                        int min = time.getInt("minute");
+                        print("Setting alarm for: " + hour + "" + min);
+                        setAlarm(hour, min, "Boarding gates for " + mFlightNum + " closing in 15 minutes.");
+                    } catch (Exception e) {
+                        print("Something went wrong in setting alarm.");
+                    }
+
+                }
+            });
+        }
+    };
+
+
+
     private Emitter.Listener onSendOffer = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    mOffer = (JSONObject) args[0];
                     print("Sending Offer...");
                     setFlightNum();
                 }
@@ -138,6 +166,7 @@ public class MainActivity extends ActionBarActivity {
 
         mSocket.on("CONNECTION_STARTED", onConnectionStarted);
         mSocket.on("NO_FLIGHT_NUM", onNoFlightNum);
+        mSocket.on("SET_ALARM", onSetAlarm);
         mSocket.on("SEND_OFFER", onSendOffer);
         mSocket.on("OFFER_VOUCHER", onOfferVoucher);
         mSocket.on("REJECT_CONFIRMED", onRejectConfirmed);
@@ -208,15 +237,41 @@ public class MainActivity extends ActionBarActivity {
     private void showOffer(JSONObject offer) {
         // show the offer to the person.
         // get the response for the offer.
+        TextView offerDescView = (TextView) findViewById(R.id.offerDesc);
+        TextView offerTitleView = (TextView) findViewById(R.id.offerTitle);
+        ImageView offerImageView = (ImageView) findViewById(R.id.offerImage);
+        String offerTitle = "";
+        String offerDesc = "";
+        String offerImage = "";
+        try {
+            offerTitle = offer.getString("title");
+            offerDesc = offer.getString("description");
+            offerImage = offer.getString("image");
+        } catch (Exception e) {
+            print("something went wrong in showing offer.");
+        }
+
+        offerTitleView.setText(offerTitle);
+        offerDescView.setText(offerDesc);
+        byte[] decodedString = Base64.decode(offerImage, Base64.DEFAULT);
+        Bitmap offerImageDecoded = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        offerImageView.setImageBitmap(offerImageDecoded);
+
+
+        setContentView(R.layout.activity_offer);
         boolean response = false; // store the result of the selection
+        waitForResponse(response);
+    }
+
+    private void waitForResponse(boolean response) {
         JSONObject offerResponse = new JSONObject();
+
         try {
             offerResponse.put("hasAccepted", response);
-            offerResponse.put("id", offer.get("id"));
+            offerResponse.put("id", mOffer.get("id"));
         } catch (Exception e) {
             print("Something went wrong with showing the offer.");
         }
-
     }
 
     private void setName() {
