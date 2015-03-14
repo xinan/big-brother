@@ -84,6 +84,24 @@ io.on('connection', function(socket) {
         userData.flightNum  = (data.flightNum === "") ? (socket.emit("no flight num", "")) : data.flightNum;
     });
     socket.on('report', function (report) {
+        var user = {
+            deviceId: 1,
+            name: "Lu Bili",
+            flight: {
+              flightNo: "EK01",
+              flightTime: "2015-04-23T20:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.244515300668223,
+              long: 55.37045352788945,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'agent',
+            statusTime: 12
+        }
+        socket.emit('register user', user);
+
         console.log('report sent');
         userData.reports.push(report);
         sendOffer(socket, report);
