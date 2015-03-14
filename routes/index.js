@@ -1,16 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+
+
+module.exports = function(io){
+  /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Big Brother APIs' });
 });
 
-// Alerts the user that he/she is late for the flight
+//Alerts the user that he/she is late for the flight
 router.get('/alert/:id', function(req, res) {
     res.send({
         status: true
     });
+    io.emit('late person');
 });
 
 // Returns the idlers 
@@ -69,5 +73,5 @@ router.get('/idlers', function(req, res) {
     requestTime: "2015-04-23T20:00:00.000+08:00"
   });
 });
-
-module.exports = router;
+  return router;
+}

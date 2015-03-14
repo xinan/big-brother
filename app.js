@@ -7,12 +7,22 @@ var bodyParser = require('body-parser');
 // var File = require('File');
 // var FileReader = require('FileReader');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+
 
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+
+var routes = require('./routes/index')(io);
+var users = require('./routes/users');
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(allowCrossDomain);
 
 app.use('/', routes);
 app.use('/users', users);
@@ -67,17 +78,17 @@ var userData = {
 };
 
 io.on('connection', function(socket) {
-    socket.emit('CONNECTION_STARTED', "Connection started successfully.");
-    socket.on('CONNECTION_CONFIRMED', function (data) {
+    socket.emit('connection started', "Connection started successfully.");
+    socket.on('connection confirmed', function (data) {
         userData.name       = data.name;
-        userData.flightNum  = (data.flightNum === "") ? (socket.emit("NO_FLIGHT_NUM", "")) : data.flightNum;
+        userData.flightNum  = (data.flightNum === "") ? (socket.emit("no flight num", "")) : data.flightNum;
     });
-    socket.on('REPORT', function (report) {
+    socket.on('report', function (report) {
         console.log('report sent');
         userData.reports.push(report);
         sendOffer(socket, report);
     });
-    socket.on('OFFER_DECISION', function (offer) {
+    socket.on('offer decision', function (offer) {
         if (offer.hasAccepted) {
             // voucher
             userData.declineNum = -1;
@@ -87,12 +98,81 @@ io.on('connection', function(socket) {
             sendRejectConfirmation(socket);
         }
     });
+    socket.on('send alert', function (offer) {
+        socket.emit('late person');
+    });
 });
 
 // Listen on port
 var port = Number(process.env.PORT || 3000);
 server.listen(port, function() {
     console.log('Socket listening on port ' + port + '...');
+});
+
+// Alerts the user that he/she is late for the flight
+// app.get('/alert', function(req, res) {
+//     console.log("sending alert");
+//     res.send({
+//         status: true
+//     });
+//     socket.emit("late person");
+// });
+
+// Returns the idlers 
+app.get('/idlers', function(req, res) {
+  res.send({
+    users: [
+      {
+        deviceId: 1,
+        name: "Lu Bili",
+        flight: {
+          flightNo: "EK01",
+          flightTime: "2015-04-23T20:00:00.000+08:00"
+        },
+        location: {
+          lat: 25.244515300668223,
+          long: 55.37045352788945,
+          floor: 1
+        },
+        boardingGate: 'A1',
+        status: 'agent',
+        statusTime: 12
+      },
+      {
+        deviceId: 2,
+        name: "Adola Fazli",
+        flight: {
+          flightNo: "EK02",
+          flightTime: "2015-04-23T20:00:00.000+08:00"
+        },
+        location: {
+          lat: 25.24282729711983,
+          long: 55.37245461207174,
+          floor: 1
+        },
+        boardingGate: 'A1',
+        status: 'idle',
+        statusTime: 23
+      },
+      {
+        deviceId: 3,
+        name: "Mrunal Kumar",
+        flight: {
+          flightNo: "EK03",
+          flightTime: "2015-04-23T20:00:00.000+08:00"
+        },
+        location: {
+          lat: 25.243092514556807,
+          long: 55.37219699963714,
+          floor: 1
+        },
+        boardingGate: 'A1',
+        status: 'alert',
+        statusTime: 10
+      }
+    ],
+    requestTime: "2015-04-23T20:00:00.000+08:00"
+  });
 });
 
 /**
@@ -145,15 +225,9 @@ function sendOffer(socket, report) {
     reader.readAsDataURL(imageFile);
     */
 
-    var offer = {
-        id: 1,
-        image: (userData.declineNum < 1) ? 'burgerking' : 'whisky',
-        title: 'Burger King Chicken Royale',
-        tier: 2,
-        description: 'You have won a free Chicken Royale in Burger King!'
-    };
+    var offer = 'burgerking';
     
-    socket.emit('SEND_OFFER', offer);
+    socket.emit('send offer', offer);
 }
 
 function sendVoucher(socket, offerID) {
