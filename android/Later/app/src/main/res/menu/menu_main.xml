@@ -8,4 +8,8 @@
         android:id="@+id/set_name"
         android:title="Set Name" />
 
+    <item
+        android:id="@+id/set_flight_num"
+        android:title="Set Flight Number" />
+
 </menu>
