@@ -150,7 +150,7 @@ app.get('/idlers', function(req, res) {
 
 
 // Listen on port
-var port = Number(process.env.PORT || 5000);
+var port = Number(process.env.PORT || 3000);
 server.listen(port, function() {
     console.log('Listening on port' + port + '...');
 });
@@ -227,8 +227,4 @@ function sendRejectConfirmation(socket) {
     socket.emit('REJECT_CONFIRMED', "");
 }
 
-var port = Number(process.env.PORT || 3000);
-server.listen(port, function() {
-    console.log('Listening on port ' + port + '...');
-});
 module.exports = app;
