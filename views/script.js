@@ -1,5 +1,5 @@
 var socket = io('http://localhost:3000');
-  socket.on('news', function (data) {
+  socket.on('CONNECTION_START', function (data) {
     console.log(data);
-    socket.emit('my other event', { my: 'data' });
+    socket.emit('CONNECTION_CONFIRM', "Client connected successfully.");
   });

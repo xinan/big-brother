@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
             mSocket = IO.socket("http://192.168.1.67:3000");
         } catch (URISyntaxException e) {}
     }
-//
+
     private Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -60,6 +60,19 @@ public class MainActivity extends ActionBarActivity {
                     }
                     // add the message to view
                     addMessage(username, message);
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onNoFlightNum = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+
                 }
             });
         }
@@ -131,6 +144,7 @@ public class MainActivity extends ActionBarActivity {
         i.putExtra(AlarmClock.EXTRA_HOUR, hour);
         i.putExtra(AlarmClock.EXTRA_MINUTES, minute);
         startActivity(i);
+        finish();
     }
 
 }

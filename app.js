@@ -61,19 +61,55 @@ app.use(function(err, req, res, next) {
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-  socket.on('foo', function (data) {
-    console.log(data);
-    socket.emit('new message', {
-        username: "testuser",
-        message: "messagetest"
+var userData = {
+    name: "",
+    flightNum: "",
+    declineNum: 0,
+    reports = [],
+
+};
+
+
+
+io.on('connection', function(socket) {
+    socket.emit('CONNECTION_START', "Connection started successfully.");
+    socket.on('CONNECTION_CONFIRM', function (data) {
+        userData.name = data.name;
+        userData.flightNum = (data.flightNum === "") ? (socket.emit("NO_FLIGHT_NUM", "")) : data.flightNum;
+    });
+    socket.on('REPORT', function (report) {
+        userData.reports.push(report);
+        sendOffer(socket, report);
+    });
+    socket.on('OFFER_DECISION', function (offer) {
+        if (offer.hasAccepted) {
+            userData.declineNum = -1;
+            sendVoucher(socket, offer.id);
+        } else {
+            userData.declineNum++;
+        }
     })
-})
+
+    socket.on('')
 });
+
+// Helper functions
+
+function sendOffer(socket, report) {
+    // analyze the report and send the socket the offer
+    var offer = ; //store offer here
+    socket.emit("SEND_OFFER", offer);
+}
+
+function sendVoucher(socket, offerID) {
+    var voucherID = getVoucher(offerID);
+    socket.emit('OFFER_VOUCHER', voucherID);
+}
+
+function getVoucher(offerID) {
+    // return the voucher code associated with the id of the offer
+    // by looking up from a database of offers.
+}
 
 
 
