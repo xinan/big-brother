@@ -144,7 +144,7 @@ function sendOffer(socket, report) {
     reader.readAsDataURL(imageFile);
     */
     var offer = {
-        id: 1
+        id: 1,
         image: 'burgerking',
         title: 'Burger King Chicken Royale',
         tier: 2,
