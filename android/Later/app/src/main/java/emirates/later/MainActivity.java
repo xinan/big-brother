@@ -39,11 +39,6 @@ import java.net.URISyntaxException;
 
 public class MainActivity extends ActionBarActivity {
 
-    final BluetoothManager bluetoothManager =
-            (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-
-    mBluetoothAdapter = bluetoothManager.getAdapter();
-
     SharedPreferences settings;
     private String mName = "";
     private String mFlightNum = "";
