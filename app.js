@@ -146,7 +146,7 @@ function sendOffer(socket, report) {
     */
     var offer = {
         id: 1,
-        image: (userData.declineNum === 0) ? 'burgerking' : 'whisky',
+        image: (userData.declineNum < 1) ? 'burgerking' : 'whisky',
         title: 'Burger King Chicken Royale',
         tier: 2,
         description: 'You have won a free Chicken Royale in Burger King!'
