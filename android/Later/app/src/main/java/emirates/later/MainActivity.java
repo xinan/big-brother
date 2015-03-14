@@ -86,7 +86,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSocket.on("new message", onNewMessage);
+        mSocket.on("CONNECTION_STARTED", onConnectionStarted);
+        mSocket.on("SEND_OFFER", onSendOffer);
+        mSocket.on("OFFER_VOUCHER", onOfferVoucher);
+        mSocket.on("REJECT_CONFIRMED", onRejectConfirmed);
         mSocket.connect();
 
         Button button = (Button) findViewById(R.id.button);
@@ -145,6 +148,11 @@ public class MainActivity extends ActionBarActivity {
         i.putExtra(AlarmClock.EXTRA_MINUTES, minute);
         startActivity(i);
         finish();
+    }
+
+    private void print(String data) {
+        Toast.makeText(getApplicationContext(), data,
+                Toast.LENGTH_SHORT).show();
     }
 
 }
