@@ -72,8 +72,8 @@ var userData = {
 
 
 io.on('connection', function(socket) {
-    socket.emit('CONNECTION_START', "Connection started successfully.");
-    socket.on('CONNECTION_CONFIRM', function (data) {
+    socket.emit('CONNECTION_STARTED', "Connection started successfully.");
+    socket.on('CONNECTION_CONFIRMED', function (data) {
         userData.name = data.name;
         userData.flightNum = (data.flightNum === "") ? (socket.emit("NO_FLIGHT_NUM", "")) : data.flightNum;
     });
@@ -87,6 +87,7 @@ io.on('connection', function(socket) {
             sendVoucher(socket, offer.id);
         } else {
             userData.declineNum++;
+            sendRejectConfirmation(socket);
         }
     })
 
@@ -109,6 +110,10 @@ function sendVoucher(socket, offerID) {
 function getVoucher(offerID) {
     // return the voucher code associated with the id of the offer
     // by looking up from a database of offers.
+}
+
+function sendRejectConfirmation(socket) {
+    socket.emit('REJECT_CONFIRMED', "");
 }
 
 
