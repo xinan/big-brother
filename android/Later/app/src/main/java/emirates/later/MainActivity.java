@@ -2,6 +2,7 @@ package emirates.later;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.provider.AlarmClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -35,6 +36,12 @@ import java.net.URISyntaxException;
 
 
 public class MainActivity extends ActionBarActivity {
+
+
+    SharedPreferences settings;
+    private String mName = "";
+    private String mFlightNum = "";
+    private JSONObject mOffer = null;
 
     private Socket mSocket;
     {
@@ -86,6 +93,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        settings = getPreferences(MODE_PRIVATE);
+
         mSocket.on("CONNECTION_STARTED", onConnectionStarted);
         mSocket.on("SEND_OFFER", onSendOffer);
         mSocket.on("OFFER_VOUCHER", onOfferVoucher);
@@ -126,6 +135,17 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    protected void onPause() {
+        super.onPause();
+
+        // We need an Editor object to make preference changes.
+        // All objects are from android.context.Context
+        SharedPreferences.Editor editor = settings.edit();
+
+        // Commit the edits!
+        editor.commit();
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -140,6 +160,10 @@ public class MainActivity extends ActionBarActivity {
 
         usernameView.setText(username);
         messageView.setText(message);
+    }
+
+    private void setName() {
+
     }
 
     private void setAlarm(int hour, int minute) {
