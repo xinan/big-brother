@@ -99,7 +99,7 @@ io.on('connection', function(socket) {
             boardingGate: 'A1',
             status: 'agent',
             statusTime: 12
-        }
+        };
         socket.emit('register user', user);
 
         console.log('report sent');
