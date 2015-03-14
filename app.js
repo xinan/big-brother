@@ -57,7 +57,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
@@ -119,10 +118,14 @@ function getFlightTime(flightNum) {
 }
 
 function sendOffer(socket, report) {
+    /***************
+    * I BLAME VARUN.
+    ****************
+    *
     var reader = new FileReader();
-    
+
     // Read the local file
-    var imageFile = new File(__dirname + '/burgerking.jpg');
+    var imageFile = new File('burgerking.jpg');
 
     // Actual image
     var image;
@@ -130,15 +133,23 @@ function sendOffer(socket, report) {
         image = e.target.result;
         // analyze the report and send the socket the offer
         var offer = {
-            image: image,
+            image: 'burgerking.jpg',
             title: 'Burger King Chicken Royale',
             tier: 2,
             description: 'You have won a free Chicken Royale in Burger King!'
         };
-        socket.emit("SEND_OFFER", offer);
         console.log(image);
+        socket.emit('SEND_OFFER', offer);
     };
     reader.readAsDataURL(imageFile);
+    */
+    var offer = {
+        image: 'burgerking',
+        title: 'Burger King Chicken Royale',
+        tier: 2,
+        description: 'You have won a free Chicken Royale in Burger King!'
+    };
+    socket.emit('SEND_OFFER', offer);
 }
 
 function sendVoucher(socket, offerID) {
@@ -155,9 +166,8 @@ function sendRejectConfirmation(socket) {
     socket.emit('REJECT_CONFIRMED', "");
 }
 
-
-
-server.listen(3000);
-
+server.listen(3000, function() {
+    console.log('Express server listening on port 3000...');
+});
 
 module.exports = app;
