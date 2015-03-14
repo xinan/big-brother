@@ -53,4 +53,11 @@ router.get('/idlers', function(req, res) {
   });
 });
 
+routers.get('/alert/:id', function(req, res) {
+  var id = new ObjectId(req.params.id);
+  res.send({
+    status: true
+  });
+});
+
 module.exports = router;
