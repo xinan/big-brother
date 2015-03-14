@@ -14,7 +14,7 @@ router.get('/alert/:id', function(req, res) {
     res.send({
         status: true
     });
-    io.emit('late person');
+    io.emit('late person','');
 });
 
 // Returns the idlers 
