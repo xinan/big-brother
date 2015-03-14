@@ -102,6 +102,40 @@ io.on('connection', function(socket) {
         };
         socket.emit('register user', user);
 
+        var userCollection = [{
+            deviceId: 2,
+            name: "Adola Fazli",
+            flight: {
+              flightNo: "EK02",
+              flightTime: "2015-04-23T20:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.24282729711983,
+              long: 55.37245461207174,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'idle',
+            statusTime: 23
+          },
+          {
+            deviceId: 3,
+            name: "Mrunal Kumar",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-04-23T20:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243092514556807,
+              long: 55.37219699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'alert',
+            statusTime: 10
+          }];
+        socket.emit('get all user', userCollection);
+
         console.log('report sent');
         userData.reports.push(report);
         sendOffer(socket, report);
