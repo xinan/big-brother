@@ -1,11 +1,13 @@
 var express = require('express');
-var path = require('path');
+var path    = require('path');
 var favicon = require('static-favicon');
-var logger = require('morgan');
+var logger  = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var File = require('File');
-var FileReader = require('FileReader');
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+// var File = require('File');
+// var FileReader = require('FileReader');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -28,8 +30,8 @@ app.use('/users', users);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
+    var err     = new Error('Not Found');
+    err.status  = 404;
     next(err);
 });
 
@@ -37,7 +39,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if ( app.get('env') === 'development' ) {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
@@ -57,9 +59,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-
 var userData = {
     name: "",
     flightNum: "",
@@ -70,8 +69,8 @@ var userData = {
 io.on('connection', function(socket) {
     socket.emit('CONNECTION_STARTED', "Connection started successfully.");
     socket.on('CONNECTION_CONFIRMED', function (data) {
-        userData.name = data.name;
-        userData.flightNum = (data.flightNum === "") ? (socket.emit("NO_FLIGHT_NUM", "")) : data.flightNum;
+        userData.name       = data.name;
+        userData.flightNum  = (data.flightNum === "") ? (socket.emit("NO_FLIGHT_NUM", "")) : data.flightNum;
     });
     socket.on('REPORT', function (report) {
         userData.reports.push(report);
@@ -87,41 +86,100 @@ io.on('connection', function(socket) {
             sendRejectConfirmation(socket);
         }
     });
-
-    // socket.on('')
 });
 
-// yi wen's get requests
+// Alerts the user that he/she is late for the flight
 app.get('/alert/:id', function(req, res) {
     res.send({
-        "status": "success"
+        status: true
     });
-    socket.emit('WAKE_UP', "");
+    socket.emit('ALERT', { message: 'You are late for your flight!'});
 });
 
-// Helper functions
+// Returns the idlers 
+app.get('/idlers', function(req, res) {
+  res.send({
+    users: [
+      {
+        deviceId: 1,
+        name: "Lu Bili",
+        flight: {
+          flightNo: "SQ01",
+          flightTime: "2015-04-23T20:00:00.000+08:00"
+        },
+        location: {
+          lat: 25.244515300668223,
+          long: 55.37045352788945,
+          floor: 1
+        },
+        boardingGate: 'A1'
+      },
+      {
+        deviceId: 2,
+        name: "Adola Fazli",
+        flight: {
+          flightNo: "SQ02",
+          flightTime: "2015-04-23T20:00:00.000+08:00"
+        },
+        location: {
+          lat: 25.24282729711983,
+          long: 55.37245461207174,
+          floor: 1
+        },
+        boardingGate: 'A1'
+      },
+      {
+        deviceId: 3,
+        name: "Mrunal Kumar",
+        flight: {
+          flightNo: "SQ03",
+          flightTime: "2015-04-23T20:00:00.000+08:00"
+        },
+        location: {
+          lat: 25.243092514556807,
+          long: 55.37219699963714,
+          floor: 1
+        },
+        boardingGate: 'A1'
+      }
+    ],
+    requestTime: "2015-04-23T20:00:00.000+08:00"
+  });
+});
 
+
+// Listen on port
+var port = Number(process.env.PORT || 5000);
+server.listen(port, function() {
+    console.log('Listening on port' + port + '...');
+});
+
+/**
+* Helper functions
+*/
 function setAlarm(socket) {
+    // TODO: Set hour and minutes
     var flightTime = getFlightTime(userData.flightNum);
     socket.emit('SET_ALARM', flightTime);
 }
 
 function getFlightTime(flightNum) {
-    // use api to find time of departure
-    // var hour;
-    // var minute;
+    // TODO: use api to find time of departure
+    var hour    = 0;
+    var minute  = 0;
 
     return {
         "hour": hour,
         "minute": minute
-    }
+    };
 }
 
 function sendOffer(socket, report) {
     /***************
-    * I BLAME VARUN.
+    * I BLAME VARUN. Nah jk. Keep the code in case things don't work. 
+    * FileReader took very long to implement. 
     ****************
-    *
+
     var reader = new FileReader();
 
     // Read the local file
@@ -143,12 +201,14 @@ function sendOffer(socket, report) {
     };
     reader.readAsDataURL(imageFile);
     */
+
     var offer = {
         image: 'burgerking',
         title: 'Burger King Chicken Royale',
         tier: 2,
         description: 'You have won a free Chicken Royale in Burger King!'
     };
+    
     socket.emit('SEND_OFFER', offer);
 }
 
@@ -157,18 +217,8 @@ function sendVoucher(socket, offerID) {
     socket.emit('OFFER_VOUCHER', voucherID);
 }
 
-function getVoucher(offerID) {
-    // return the voucher code associated with the id of the offer
-    // by looking up from a database of offers.
-}
-
 function sendRejectConfirmation(socket) {
     socket.emit('REJECT_CONFIRMED', "");
 }
-
-var port = Number(process.env.PORT || 5000);
-server.listen(port, function() {
-    console.log('Listening on port' + port + '...');
-});
 
 module.exports = app;
