@@ -1,10 +1,12 @@
 package emirates.later;
 
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.provider.AlarmClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -37,6 +39,10 @@ import java.net.URISyntaxException;
 
 public class MainActivity extends ActionBarActivity {
 
+    final BluetoothManager bluetoothManager =
+            (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+
+    mBluetoothAdapter = bluetoothManager.getAdapter();
 
     SharedPreferences settings;
     private String mName = "";
