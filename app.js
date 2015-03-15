@@ -89,7 +89,7 @@ io.on('connection', function(socket) {
             name: "Lu Bili",
             flight: {
               flightNo: "EK01",
-              flightTime: "2015-04-23T20:00:00.000+08:00"
+              flightTime: "2015-04-23T13:00:00.000+08:00"
             },
             location: {
               lat: 25.244515300668223,
@@ -97,15 +97,20 @@ io.on('connection', function(socket) {
               floor: 1
             },
             boardingGate: 'A1',
-            status: 'agent',
+            status: 'idle',
             statusTime: 12
         };
-        socket.emit('register user', user);
+        
 
         console.log('report sent');
         userData.reports.push(report);
         sendOffer(socket, report);
     });
+    
+    socket.on('register', function (req) {
+        socket.emit('register user', '');
+    });
+
     socket.on('offer decision', function (offer) {
         if (offer.hasAccepted) {
             // voucher
@@ -126,7 +131,7 @@ io.on('connection', function(socket) {
             name: "Adola Fazli",
             flight: {
               flightNo: "EK02",
-              flightTime: "2015-04-23T20:00:00.000+08:00"
+              flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
               lat: 25.24282729711983,
@@ -134,7 +139,7 @@ io.on('connection', function(socket) {
               floor: 1
             },
             boardingGate: 'A1',
-            status: 'idle',
+            status: 'agent',
             statusTime: 23
           },
           {
@@ -142,7 +147,7 @@ io.on('connection', function(socket) {
             name: "Mrunal Kumar",
             flight: {
               flightNo: "EK03",
-              flightTime: "2015-04-23T20:00:00.000+08:00"
+              flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
               lat: 25.243092514556807,
@@ -151,6 +156,150 @@ io.on('connection', function(socket) {
             },
             boardingGate: 'A1',
             status: 'alert',
+            statusTime: 10
+          },
+          {
+            deviceId: 4,
+            name: "Spongebob Squarepants",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243192514556807,
+              long: 55.37129699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'agent',
+            statusTime: 10
+          },
+          {
+            deviceId: 5,
+            name: "Patrick Star",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243192514556807,
+              long: 55.37209699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'alert',
+            statusTime: 10
+          },
+          {
+            deviceId: 6,
+            name: "Chuck Norris",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.242902514556807,
+              long: 55.37229699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'alert',
+            statusTime: 10
+          },
+          {
+            deviceId: 7,
+            name: "Justin Bieber",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243122514556807,
+              long: 55.37239699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'agent',
+            statusTime: 10
+          },
+          {
+            deviceId: 8,
+            name: "Bill Gates",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243392514556807,
+              long: 55.37209699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'idle',
+            statusTime: 10
+          },
+          {
+            deviceId: 9,
+            name: "Ryan Gosling",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243302514556807,
+              long: 55.37330699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'idle',
+            statusTime: 10
+          },
+          {
+            deviceId: 10,
+            name: "Steve Jobs",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243202514556807,
+              long: 55.37219699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'alert',
+            statusTime: 10
+          },
+          {
+            deviceId: 11,
+            name: "Mr Pringles",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243292514556807,
+              long: 55.37239699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'alert',
+            statusTime: 10
+          },
+          {
+            deviceId: 11,
+            name: "LeBron James",
+            flight: {
+              flightNo: "EK03",
+              flightTime: "2015-03-15T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.243392514556807,
+              long: 55.37219699963714,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'idle',
             statusTime: 10
           }];
         socket.emit('all users', userCollection);
@@ -172,6 +321,7 @@ server.listen(port, function() {
 //     socket.emit("late person");
 // });
 
+/*
 // Returns the idlers 
 app.get('/idlers', function(req, res) {
   res.send({
@@ -228,6 +378,7 @@ app.get('/idlers', function(req, res) {
     requestTime: "2015-04-23T20:00:00.000+08:00"
   });
 });
+*/
 
 /**
 * Helper functions
@@ -252,33 +403,6 @@ function getFlightTime(flightNum) {
 }
 
 function sendOffer(socket, report) {
-    /***************
-    * I BLAME VARUN. Nah jk. Keep the code in case things don't work. 
-    * FileReader took very long to implement. 
-    ****************
-
-    var reader = new FileReader();
-
-    // Read the local file
-    var imageFile = new File('burgerking.jpg');
-
-    // Actual image
-    var image;
-    reader.onload = function (e) {
-        image = e.target.result;
-        // analyze the report and send the socket the offer
-        var offer = {
-            image: 'burgerking.jpg',
-            title: 'Burger King Chicken Royale',
-            tier: 2,
-            description: 'You have won a free Chicken Royale in Burger King!'
-        };
-        console.log(image);
-        socket.emit('SEND_OFFER', offer);
-    };
-    reader.readAsDataURL(imageFile);
-    */
-
     var offer = 'burgerking';
     
     socket.emit('send offer', offer);

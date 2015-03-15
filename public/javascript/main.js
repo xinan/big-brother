@@ -16,4 +16,12 @@ $(document).ready(function() {
     });
   });
 
+  $('#reminder').on('click', function() {
+    console.log('Reminder sent');
+    $.ajax({
+      method: 'GET',
+      url: '/reminder'
+    });
+  });
+
 });

@@ -26,7 +26,7 @@ router.get('/idlers', function(req, res) {
         name: "Lu Bili",
         flight: {
           flightNo: "EK01",
-          flightTime: "2015-04-23T20:00:00.000+08:00"
+          flightTime: "2015-03-15T13:00:00.000+08:00"
         },
         location: {
           lat: 25.244515300668223,
@@ -34,7 +34,7 @@ router.get('/idlers', function(req, res) {
           floor: 1
         },
         boardingGate: 'A1',
-        status: 'agent',
+        status: 'idle',
         statusTime: 12
       },
       {
@@ -42,7 +42,7 @@ router.get('/idlers', function(req, res) {
         name: "Adola Fazli",
         flight: {
           flightNo: "EK02",
-          flightTime: "2015-04-23T20:00:00.000+08:00"
+          flightTime: "2015-03-15T13:00:00.000+08:00"
         },
         location: {
           lat: 25.24282729711983,
@@ -50,7 +50,7 @@ router.get('/idlers', function(req, res) {
           floor: 1
         },
         boardingGate: 'A1',
-        status: 'idle',
+        status: 'agent',
         statusTime: 23
       },
       {
@@ -58,7 +58,7 @@ router.get('/idlers', function(req, res) {
         name: "Mrunal Kumar",
         flight: {
           flightNo: "EK03",
-          flightTime: "2015-04-23T20:00:00.000+08:00"
+          flightTime: "2015-03-15T13:00:00.000+08:00"
         },
         location: {
           lat: 25.243092514556807,
@@ -70,7 +70,7 @@ router.get('/idlers', function(req, res) {
         statusTime: 10
       }
     ],
-    requestTime: "2015-04-23T20:00:00.000+08:00"
+    requestTime: "2015-03-15T10:00:00.000+08:00"
   });
 });
 
@@ -81,6 +81,11 @@ router.get('/sendoffer1', function(req, res) {
 
 router.get('/sendoffer2', function(req, res) {
   io.emit('send offer', 'whiskey');
+  res.send(200);
+});
+
+router.get('/reminder', function(req, res) {
+  io.emit('flight delay');
   res.send(200);
 });
 
