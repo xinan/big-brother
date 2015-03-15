@@ -24,7 +24,7 @@ $(document).ready(function() {
     });
   });
 
-  $('#emitRegister').on('click', function() {
+  $('#emitRegisterUser').on('click', function() {
     console.log('Emit register clicked');
     $.ajax({
       method: 'GET',
