@@ -24,4 +24,11 @@ $(document).ready(function() {
     });
   });
 
+  $('#emitRegister').on('click', function() {
+    console.log('Emit register clicked');
+    $.ajax({
+      method: 'GET',
+      url: '/emitRegisterUser'
+    });
+  });
 });

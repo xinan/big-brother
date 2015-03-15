@@ -124,7 +124,7 @@ io.on('connection', function(socket) {
             status: 'idle',
             statusTime: 12
         };
-        
+
         socket.emit('register user', user);
     });
 
@@ -183,8 +183,8 @@ io.on('connection', function(socket) {
               flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
-              lat: 25.243292514556807,
-              long: 55.37219699963714,
+              lat: 25.244415300668223,
+              long: 55.37209699963714,
               floor: 1
             },
             boardingGate: 'A1',
@@ -247,8 +247,8 @@ io.on('connection', function(socket) {
               flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
-              lat: 25.243202514556807,
-              long: 55.37219699963714,
+              lat: 25.243302514556807,
+              long: 55.37229699963714,
               floor: 1
             },
             boardingGate: 'A1',
