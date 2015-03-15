@@ -1,0 +1,480 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F20E54FC1AB4FCA60099D728 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E54FB1AB4FCA60099D728 /* ListTableViewController.swift */; };
+		F20E54FE1AB501860099D728 /* AirportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E54FD1AB501860099D728 /* AirportTableViewController.swift */; };
+		F220CDAF1AB496230099DA80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDAE1AB496230099DA80 /* AppDelegate.swift */; };
+		F220CDB11AB496230099DA80 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDB01AB496230099DA80 /* AppViewController.swift */; };
+		F220CDB41AB496230099DA80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F220CDB21AB496230099DA80 /* Main.storyboard */; };
+		F220CDB61AB496230099DA80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F220CDB51AB496230099DA80 /* Images.xcassets */; };
+		F220CDB91AB496230099DA80 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F220CDB71AB496230099DA80 /* LaunchScreen.xib */; };
+		F220CDC51AB496230099DA80 /* BigBrotherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDC41AB496230099DA80 /* BigBrotherTests.swift */; };
+		F220CDD91AB4A88A0099DA80 /* SocketAckHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDD11AB4A88A0099DA80 /* SocketAckHandler.swift */; };
+		F220CDDA1AB4A88A0099DA80 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDD21AB4A88A0099DA80 /* SocketEngine.swift */; };
+		F220CDDB1AB4A88A0099DA80 /* SocketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDD31AB4A88A0099DA80 /* SocketEvent.swift */; };
+		F220CDDC1AB4A88A0099DA80 /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDD41AB4A88A0099DA80 /* SocketEventHandler.swift */; };
+		F220CDDD1AB4A88A0099DA80 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDD51AB4A88A0099DA80 /* SocketIOClient.swift */; };
+		F220CDDE1AB4A88A0099DA80 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDD61AB4A88A0099DA80 /* SocketParser.swift */; };
+		F220CDDF1AB4A88A0099DA80 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDD71AB4A88A0099DA80 /* SwiftRegex.swift */; };
+		F220CDE01AB4A88A0099DA80 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDD81AB4A88A0099DA80 /* WebSocket.swift */; };
+		F220CDE21AB4A8D60099DA80 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220CDE11AB4A8D60099DA80 /* PopupViewController.swift */; };
+		F2B28DF51AB4DE70009FE06F /* VoucherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B28DF41AB4DE70009FE06F /* VoucherViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F220CDBF1AB496230099DA80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F220CDA11AB496230099DA80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F220CDA81AB496230099DA80;
+			remoteInfo = BigBrother;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F20E54FB1AB4FCA60099D728 /* ListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		F20E54FD1AB501860099D728 /* AirportTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirportTableViewController.swift; sourceTree = "<group>"; };
+		F220CDA91AB496230099DA80 /* BigBrother.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigBrother.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F220CDAD1AB496230099DA80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F220CDAE1AB496230099DA80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F220CDB01AB496230099DA80 /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		F220CDB31AB496230099DA80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F220CDB51AB496230099DA80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F220CDB81AB496230099DA80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F220CDBE1AB496230099DA80 /* BigBrotherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigBrotherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F220CDC31AB496230099DA80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F220CDC41AB496230099DA80 /* BigBrotherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBrotherTests.swift; sourceTree = "<group>"; };
+		F220CDD11AB4A88A0099DA80 /* SocketAckHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckHandler.swift; sourceTree = "<group>"; };
+		F220CDD21AB4A88A0099DA80 /* SocketEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngine.swift; sourceTree = "<group>"; };
+		F220CDD31AB4A88A0099DA80 /* SocketEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEvent.swift; sourceTree = "<group>"; };
+		F220CDD41AB4A88A0099DA80 /* SocketEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEventHandler.swift; sourceTree = "<group>"; };
+		F220CDD51AB4A88A0099DA80 /* SocketIOClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClient.swift; sourceTree = "<group>"; };
+		F220CDD61AB4A88A0099DA80 /* SocketParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
+		F220CDD71AB4A88A0099DA80 /* SwiftRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRegex.swift; sourceTree = "<group>"; };
+		F220CDD81AB4A88A0099DA80 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		F220CDE11AB4A8D60099DA80 /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		F2B28DF41AB4DE70009FE06F /* VoucherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoucherViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F220CDA61AB496230099DA80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F220CDBB1AB496230099DA80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F220CDA01AB496230099DA80 = {
+			isa = PBXGroup;
+			children = (
+				F220CDAB1AB496230099DA80 /* BigBrother */,
+				F220CDC11AB496230099DA80 /* BigBrotherTests */,
+				F220CDAA1AB496230099DA80 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F220CDAA1AB496230099DA80 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F220CDA91AB496230099DA80 /* BigBrother.app */,
+				F220CDBE1AB496230099DA80 /* BigBrotherTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F220CDAB1AB496230099DA80 /* BigBrother */ = {
+			isa = PBXGroup;
+			children = (
+				F220CDD01AB4A88A0099DA80 /* SwiftIO */,
+				F220CDAE1AB496230099DA80 /* AppDelegate.swift */,
+				F220CDB01AB496230099DA80 /* AppViewController.swift */,
+				F20E54FB1AB4FCA60099D728 /* ListTableViewController.swift */,
+				F220CDB21AB496230099DA80 /* Main.storyboard */,
+				F20E54FD1AB501860099D728 /* AirportTableViewController.swift */,
+				F2B28DF41AB4DE70009FE06F /* VoucherViewController.swift */,
+				F220CDE11AB4A8D60099DA80 /* PopupViewController.swift */,
+				F220CDB51AB496230099DA80 /* Images.xcassets */,
+				F220CDB71AB496230099DA80 /* LaunchScreen.xib */,
+				F220CDAC1AB496230099DA80 /* Supporting Files */,
+			);
+			path = BigBrother;
+			sourceTree = "<group>";
+		};
+		F220CDAC1AB496230099DA80 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F220CDAD1AB496230099DA80 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F220CDC11AB496230099DA80 /* BigBrotherTests */ = {
+			isa = PBXGroup;
+			children = (
+				F220CDC41AB496230099DA80 /* BigBrotherTests.swift */,
+				F220CDC21AB496230099DA80 /* Supporting Files */,
+			);
+			path = BigBrotherTests;
+			sourceTree = "<group>";
+		};
+		F220CDC21AB496230099DA80 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F220CDC31AB496230099DA80 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F220CDD01AB4A88A0099DA80 /* SwiftIO */ = {
+			isa = PBXGroup;
+			children = (
+				F220CDD11AB4A88A0099DA80 /* SocketAckHandler.swift */,
+				F220CDD21AB4A88A0099DA80 /* SocketEngine.swift */,
+				F220CDD31AB4A88A0099DA80 /* SocketEvent.swift */,
+				F220CDD41AB4A88A0099DA80 /* SocketEventHandler.swift */,
+				F220CDD51AB4A88A0099DA80 /* SocketIOClient.swift */,
+				F220CDD61AB4A88A0099DA80 /* SocketParser.swift */,
+				F220CDD71AB4A88A0099DA80 /* SwiftRegex.swift */,
+				F220CDD81AB4A88A0099DA80 /* WebSocket.swift */,
+			);
+			path = SwiftIO;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F220CDA81AB496230099DA80 /* BigBrother */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F220CDC81AB496230099DA80 /* Build configuration list for PBXNativeTarget "BigBrother" */;
+			buildPhases = (
+				F220CDA51AB496230099DA80 /* Sources */,
+				F220CDA61AB496230099DA80 /* Frameworks */,
+				F220CDA71AB496230099DA80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BigBrother;
+			productName = BigBrother;
+			productReference = F220CDA91AB496230099DA80 /* BigBrother.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F220CDBD1AB496230099DA80 /* BigBrotherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F220CDCB1AB496230099DA80 /* Build configuration list for PBXNativeTarget "BigBrotherTests" */;
+			buildPhases = (
+				F220CDBA1AB496230099DA80 /* Sources */,
+				F220CDBB1AB496230099DA80 /* Frameworks */,
+				F220CDBC1AB496230099DA80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F220CDC01AB496230099DA80 /* PBXTargetDependency */,
+			);
+			name = BigBrotherTests;
+			productName = BigBrotherTests;
+			productReference = F220CDBE1AB496230099DA80 /* BigBrotherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F220CDA11AB496230099DA80 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Liu Xinan";
+				TargetAttributes = {
+					F220CDA81AB496230099DA80 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					F220CDBD1AB496230099DA80 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = F220CDA81AB496230099DA80;
+					};
+				};
+			};
+			buildConfigurationList = F220CDA41AB496230099DA80 /* Build configuration list for PBXProject "BigBrother" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F220CDA01AB496230099DA80;
+			productRefGroup = F220CDAA1AB496230099DA80 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F220CDA81AB496230099DA80 /* BigBrother */,
+				F220CDBD1AB496230099DA80 /* BigBrotherTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F220CDA71AB496230099DA80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F220CDB41AB496230099DA80 /* Main.storyboard in Resources */,
+				F220CDB91AB496230099DA80 /* LaunchScreen.xib in Resources */,
+				F220CDB61AB496230099DA80 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F220CDBC1AB496230099DA80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F220CDA51AB496230099DA80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F220CDE21AB4A8D60099DA80 /* PopupViewController.swift in Sources */,
+				F220CDDC1AB4A88A0099DA80 /* SocketEventHandler.swift in Sources */,
+				F220CDDA1AB4A88A0099DA80 /* SocketEngine.swift in Sources */,
+				F220CDDF1AB4A88A0099DA80 /* SwiftRegex.swift in Sources */,
+				F220CDB11AB496230099DA80 /* AppViewController.swift in Sources */,
+				F20E54FC1AB4FCA60099D728 /* ListTableViewController.swift in Sources */,
+				F220CDDE1AB4A88A0099DA80 /* SocketParser.swift in Sources */,
+				F220CDDB1AB4A88A0099DA80 /* SocketEvent.swift in Sources */,
+				F220CDDD1AB4A88A0099DA80 /* SocketIOClient.swift in Sources */,
+				F220CDD91AB4A88A0099DA80 /* SocketAckHandler.swift in Sources */,
+				F20E54FE1AB501860099D728 /* AirportTableViewController.swift in Sources */,
+				F2B28DF51AB4DE70009FE06F /* VoucherViewController.swift in Sources */,
+				F220CDAF1AB496230099DA80 /* AppDelegate.swift in Sources */,
+				F220CDE01AB4A88A0099DA80 /* WebSocket.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F220CDBA1AB496230099DA80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F220CDC51AB496230099DA80 /* BigBrotherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F220CDC01AB496230099DA80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F220CDA81AB496230099DA80 /* BigBrother */;
+			targetProxy = F220CDBF1AB496230099DA80 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F220CDB21AB496230099DA80 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F220CDB31AB496230099DA80 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F220CDB71AB496230099DA80 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F220CDB81AB496230099DA80 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F220CDC61AB496230099DA80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F220CDC71AB496230099DA80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F220CDC91AB496230099DA80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BigBrother/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F220CDCA1AB496230099DA80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BigBrother/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F220CDCC1AB496230099DA80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BigBrotherTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigBrother.app/BigBrother";
+			};
+			name = Debug;
+		};
+		F220CDCD1AB496230099DA80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BigBrotherTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigBrother.app/BigBrother";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F220CDA41AB496230099DA80 /* Build configuration list for PBXProject "BigBrother" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F220CDC61AB496230099DA80 /* Debug */,
+				F220CDC71AB496230099DA80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F220CDC81AB496230099DA80 /* Build configuration list for PBXNativeTarget "BigBrother" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F220CDC91AB496230099DA80 /* Debug */,
+				F220CDCA1AB496230099DA80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F220CDCB1AB496230099DA80 /* Build configuration list for PBXNativeTarget "BigBrotherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F220CDCC1AB496230099DA80 /* Debug */,
+				F220CDCD1AB496230099DA80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F220CDA11AB496230099DA80 /* Project object */;
+}
