@@ -105,6 +105,7 @@ router.get('/emitRegisterUser', function(req, res) {
       statusTime: 12
   };
   io.emit('register user', user);
+  res.send(200);
 });
 
   return router;
