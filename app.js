@@ -223,9 +223,9 @@ io.on('connection', function(socket) {
           },
           {
             deviceId: 8,
-            name: "Bill Gates",
+            name: "Bobby Quek",
             flight: {
-              flightNo: "EK03",
+              flightNo: "EK354",
               flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
@@ -233,7 +233,7 @@ io.on('connection', function(socket) {
               long: 55.37209699963714,
               floor: 1
             },
-            boardingGate: 'A1',
+            boardingGate: 'A19',
             status: 'idle',
             statusTime: 10
           },
