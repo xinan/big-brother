@@ -108,7 +108,24 @@ io.on('connection', function(socket) {
     });
 
     socket.on('register', function (req) {
-        socket.emit('register user', '');
+        var user = {
+            deviceId: 1,
+            name: "Lu Bili",
+            flight: {
+              flightNo: "EK01",
+              flightTime: "2015-04-23T13:00:00.000+08:00"
+            },
+            location: {
+              lat: 25.244515300668223,
+              long: 55.37045352788945,
+              floor: 1
+            },
+            boardingGate: 'A1',
+            status: 'idle',
+            statusTime: 12
+        };
+        
+        socket.emit('register user', user);
     });
 
     socket.on('offer decision', function (offer) {
