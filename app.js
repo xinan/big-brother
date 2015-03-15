@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 // var File = require('File');
 // var FileReader = require('FileReader');
 
-
-
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
