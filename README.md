@@ -20,3 +20,6 @@ But you know what? Who is the Big Brother? In fact, our airport admins are the b
 
 ### Admin Website
 ![admin_screenshot](admin_screenshot.png)
+
+### License
+BigBrother is released under [MIT License](http://www.opensource.org/licenses/MIT)
