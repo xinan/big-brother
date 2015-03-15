@@ -165,7 +165,7 @@ io.on('connection', function(socket) {
               flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
-              lat: 25.243092514556807,
+              lat: 25.243042514556807,
               long: 55.37219699963714,
               floor: 1
             },
@@ -197,7 +197,7 @@ io.on('connection', function(socket) {
               flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
-              lat: 25.242902514556807,
+              lat: 25.243002514556807,
               long: 55.37229699963714,
               floor: 1
             },
@@ -214,7 +214,7 @@ io.on('connection', function(socket) {
             },
             location: {
               lat: 25.243122514556807,
-              long: 55.37239699963714,
+              long: 55.37249699963714,
               floor: 1
             },
             boardingGate: 'A1',
@@ -229,7 +229,7 @@ io.on('connection', function(socket) {
               flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
-              lat: 25.243392514556807,
+              lat: 25.243492514556807,
               long: 55.37209699963714,
               floor: 1
             },
@@ -246,7 +246,7 @@ io.on('connection', function(socket) {
             },
             location: {
               lat: 25.243302514556807,
-              long: 55.37229699963714,
+              long: 55.37239699963714,
               floor: 1
             },
             boardingGate: 'A1',
