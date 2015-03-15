@@ -181,8 +181,8 @@ io.on('connection', function(socket) {
               flightTime: "2015-03-15T13:00:00.000+08:00"
             },
             location: {
-              lat: 25.244515300668223,
-              long: 55.37199699963714,
+              lat: 25.244315300668223,
+              long: 55.37129699963714,
               floor: 1
             },
             boardingGate: 'A1',
