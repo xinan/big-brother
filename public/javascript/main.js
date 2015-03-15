@@ -2,13 +2,10 @@ $(document).ready(function() {
 
   $('#offer1').on('click', function() {
     console.log('Offer 1 sent');
-    /*
     $.ajax({
       method: 'GET',
       url: '/sendoffer1'
     });
-    */
-    io.emit('send offer', 'burgerking');
   });
 
   $('#offer2').on('click', function() {
