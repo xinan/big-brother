@@ -6,8 +6,6 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "File": "^0.10.2",
-    "FileReader": "^0.10.2",
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",

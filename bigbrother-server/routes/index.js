@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports = function(io){
-  /* GET home page. */
+module.exports = function(io) {
+
+/* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Big Brother APIs' });
 });
@@ -109,4 +110,4 @@ router.get('/emitRegisterUser', function(req, res) {
 });
 
   return router;
-}
+};

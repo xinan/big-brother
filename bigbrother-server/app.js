@@ -4,8 +4,6 @@ var favicon = require('static-favicon');
 var logger  = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// var File = require('File');
-// var FileReader = require('FileReader');
 
 var app = express();
 var server = require('http').Server(app);
@@ -20,7 +18,7 @@ var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     next();
-}
+};
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -99,7 +97,6 @@ io.on('connection', function(socket) {
             statusTime: 12
         };
         
-
         console.log('report sent');
         userData.reports.push(report);
         sendOffer(socket, report);
@@ -136,6 +133,7 @@ io.on('connection', function(socket) {
             sendRejectConfirmation(socket);
         }
     });
+
     socket.on('send alert', function (offer) {
         socket.emit('late person');
     });
@@ -263,52 +261,15 @@ server.listen(port, function() {
     console.log('Socket listening on port ' + port + '...');
 });
 
-// Alerts the user that he/she is late for the flight
-// app.get('/alert', function(req, res) {
-//     console.log("sending alert");
-//     res.send({
-//         status: true
-//     });
-//     socket.emit("late person");
-// });
-
-/**
-* Helper functions
-*/
-function setAlarm(socket) {
-    // TODO: Set hour and minutes
-    // var flightTime = getFlightTime(userData.flightNum);
-    // socket.emit('SET_ALARM', flightTime);
-}
-
-function getFlightTime(flightNum) {
-    // TODO: use api to find time of departure
-    /*
-    var hour    = 0;
-    var minute  = 0;
-
-    return {
-        "hour": hour,
-        "minute": minute
-    };
-    */
-}
-
 function sendOffer(socket, report) {
     var offer = 'burgerking';
     
     socket.emit('send offer', offer);
 }
 
-function sendVoucher(socket, offerID) {
-    /*
-    var voucherID = getVoucher(offerID);
-    socket.emit('OFFER_VOUCHER', voucherID);
-    */
-}
+// Functioanlities that are not used
+function sendVoucher(socket, offerID) {}
 
-function sendRejectConfirmation(socket) {
-    // socket.emit('REJECT_CONFIRMED', "");
-}
+function sendRejectConfirmation(socket) {}
 
 module.exports = app;
